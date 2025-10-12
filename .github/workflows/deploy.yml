@@ -1,0 +1,36 @@
+name: Deploy S3 Assets
+
+on:
+  push:
+    branches:
+      - main # This must match the 'sub' condition in your Trust Policy
+
+# IMPORTANT: These permissions are required for OIDC authentication
+permissions:
+  id-token: write # Allows the job to fetch the OIDC token
+  contents: read  # Allows checkout of the code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configure AWS Credentials using OIDC
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::273706657348:role/GitHub-S3-Deployer-Role
+          aws-region: us-east-1
+          role-session-name: ${{ github.run_id }}
+
+      # Use the temporary credentials to run AWS CLI commands
+      - name: Sync files to S3
+        run: |
+          # The aws CLI now uses the temporary credentials assumed by the role
+          aws s3 sync ./ s3://hairdye.sixbynine.com/ --delete
+
+      - name: Invalidate CloudFront Cache (Optional)
+        run: |
+          echo "Deployment complete."
