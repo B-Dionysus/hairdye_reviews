@@ -18,12 +18,13 @@ body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI"
 
 /* Grid page styles */
 .grid-page .grid-wrap{display:grid;grid-template-columns:140px 1fr;gap:1rem;align-items:start}
-/* Create explicit rows so label column aligns with grid-area rows */
-.grid-labels{display:grid;grid-template-rows:40px repeat(7,200px);gap:0.75rem}
+.grid-labels{display:grid;grid-template-rows:40px repeat(7,minmax(140px,auto));gap:0.75rem}
 .grid-labels > div:first-child{height:40px}
 .grid-labels .row-label{display:flex;align-items:center;padding:0.45rem 0.6rem;background:var(--card);border-radius:10px;font-weight:700;box-shadow:var(--shadow);justify-content:center}
-/* Match the same explicit rows on the grid-area using grid-auto-rows to keep heights consistent */
-.grid-area{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:40px repeat(7,200px);gap:0.75rem}
+/* mobile inline labels (hidden by default) */
+.mobile-row-label{display:none}
+/* Make rows flexible: a small minimum with auto height to improve small-screen layout */
+.grid-area{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:40px repeat(7,minmax(140px,auto));gap:0.75rem}
 .grid-area .col-header{background:transparent;color:var(--muted);font-weight:700;padding:0.35rem 0.6rem;text-align:center}
 .grid-card{background:var(--card);border-radius:12px;padding:0.6rem;display:flex;flex-direction:column;gap:0.45rem;min-height:180px;box-shadow:var(--shadow)}
 .card-meta{font-weight:700;font-size:0.9rem;color:#111827}
@@ -35,11 +36,23 @@ body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI"
   .grid-wrap{grid-template-columns:120px 1fr}
   .grid-card{min-height:150px}
 }
-@media (max-width:700px){
-  .grid-wrap{grid-template-columns:1fr}
-  .grid-labels{display:flex;gap:0.5rem;overflow:auto;padding-bottom:0.5rem}
-  .grid-labels .row-label{flex:0 0 auto}
+@media (max-width:900px){
+  /* collapse to 2 columns on medium screens */
   .grid-area{grid-template-columns:repeat(2,1fr)}
+}
+  /* Ensure mobile row labels are visible and styled */
+  .grid-area .mobile-row-label{display:block !important;width:100% !important;box-sizing:border-box;padding:0.6rem 0.75rem;margin:0.35rem 0;border-radius:10px;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#0f172a;visibility:visible !important;opacity:1 !important}
+@media (max-width:700px){
+  /* Mobile: hide left labels and use inline mobile labels before each row */
+  .grid-wrap{grid-template-columns:1fr}
+  .grid-labels{display:none}
+  /* ensure mobile labels are visible and take full width */
+  .mobile-row-label{display:block !important;width:100%;box-sizing:border-box;padding:0.6rem 0.75rem;margin:0.35rem 0;border-radius:10px;background:var(--card);box-shadow:var(--shadow);font-weight:700;color:#0f172a}
+
+  /* Make grid cards stack vertically, full width */
+  .grid-area{display:block}
+  .grid-area .col-header{display:none}
+  .grid-card{width:100%;margin-bottom:0.75rem}
 }
 
 /* Small utility */
