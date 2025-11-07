@@ -28,6 +28,35 @@ body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI"
 .grid-area .col-header{background:transparent;color:var(--muted);font-weight:700;padding:0.35rem 0.6rem;text-align:center}
 .grid-card{background:var(--card);border-radius:12px;padding:0.6rem;display:flex;flex-direction:column;gap:0.45rem;min-height:180px;box-shadow:var(--shadow)}
 .card-meta{font-weight:700;font-size:0.9rem;color:#111827}
+.card-category{
+  font-weight:800;
+  font-size:0.9rem;
+  color:#111827;
+  text-align: center;  
+  padding-bottom: 50%;
+  padding-top: 50%;
+}
+.season{
+  font-size: larger;
+}
+.pink{
+  background-color: #e888c7;
+}
+.orange{
+  background-color: #de8d5b;
+}
+.red{
+  background-color: #cc5757;
+}
+.purple{
+  background-color: #ca5fae;
+}
+.blue{
+  background-color: #a688e8;
+}
+.green{
+  background-color: #88e892;
+}
 .card-photo{flex:1;border-radius:8px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:var(--muted);margin-top:0.25rem}
 .card-review{font-size:0.95rem;color:#374151;padding-top:0.35rem}
 
