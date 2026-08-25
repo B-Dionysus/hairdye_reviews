@@ -5,7 +5,7 @@
   --accent:#b76ba3;
   --accent-2:#6ba3b7;
   --radius:12px;
-  --max-width:1100px;
+  --max-width:95%;
   --shadow: 0 6px 18px rgba(16,24,40,0.06);
 }
 *{box-sizing:border-box}
@@ -62,7 +62,7 @@ body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI"
 
 /* Generic responsive tweaks */
 @media (max-width:1000px){
-  .grid-wrap{grid-template-columns:120px 1fr}
+  .grid-wrap{grid-template-columns:240px 1fr}
   .grid-card{min-height:150px}
 }
 @media (max-width:900px){
